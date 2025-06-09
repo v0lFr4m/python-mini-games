@@ -1,20 +1,45 @@
 import random
 
+
+# TODO:
+# SQUID GAME TYPE ROCK PAPER SCISSORS WITH TWO HANDS , ADD OPTIONS FOR IT !
+
+
 def you_win_message():
-    return f'\n|==============================================================================|\n                             Computer choose: {computer_says} \n|---------------------------------- YOU WIN -----------------------------------|\n|==============================================================================|\n\n\n\n\n'
+    return (f'\n|==============================================================================|\n'
+            f'                             Computer choose: {computer_says} \n'
+            f'|---------------------------------- YOU WIN -----------------------------------|\n'
+            f'|==============================================================================|\n\n\n\n\n')
 
 def draw_message():
-    return f'\n|==============================================================================|\n                             Computer choose: {computer_says} \n|------------------------------ THE GAME IS DRAW ------------------------------|\n|==============================================================================|\n\n'
+    return (f'\n|==============================================================================|\n'
+            f'                             Computer choose: {computer_says} \n'
+            f'|------------------------------ THE GAME IS DRAW ------------------------------|\n'
+            f'|==============================================================================|\n\n')
 
 def you_lose_message():
-    return f'\n|==============================================================================|\n                             Computer choose: {computer_says} \n|--------------------------------- YOU LOSE -----------------------------------|\n|==============================================================================|\n\n'
+    return (f'\n|==============================================================================|\n'
+            f'                             Computer choose: {computer_says} \n'
+            f'|--------------------------------- YOU LOSE -----------------------------------|\n'
+            f'|==============================================================================|\n\n')
 
 def greeting():
-    return '|==============================================================================|\n|------------------- Welcome to game Rock , Paper , Scissors ------------------|\n|==============================================================================|\n|---------------------------- The rules are simple, ---------------------------|\n|-------------- You need to enter Rock ,Paper , Scissors ----------------------|\n|==============================================================================|\n'
+    return ('|==============================================================================|\n'
+            '|------------------- Welcome to game Rock , Paper , Scissors ------------------|\n'
+            '|==============================================================================|\n'
+            '|---------------------------- The rules are simple, ---------------------------|\n'
+            '|-------------- You need to enter Rock ,Paper , Scissors ----------------------|\n'
+            '|==============================================================================|\n')
 
 def final_score(player_score :int ,computer_score: int , player_games : int):
-       return f'|==============================================================================|\n                             Player score: {player_score} \n                             Player score: {computer_score} \n                             Games played: {player_games} \n|==============================================================================|\n'
+       return (f'|==============================================================================|\n'
+               f'                             Player score: {player_score} \n'
+               f'                             Computer score: {computer_score} \n'
+               f'                             Games played: {player_games} \n'
+               f'|==============================================================================|\n')
 
+def error_message():
+    return '\nInvalid input! Try again... \n'
 
 
 def you_win(player :str , computer :str):
@@ -45,22 +70,25 @@ while True:
     elif player_move == 's':
         player_move = 'scissors'
     else:
-        print('\nInvalid input! Try again... \n')
+        print(error_message())
         continue
 
     if you_win(player_move , computer_says):
         user_wins += 1
         game_counter += 1
         print(you_win_message())
-        command = input("Do you want to play again YES/NO:").lower()
+        while True:
+            command = input("Do you want to play again YES/NO:").lower()
+            if command == 'yes':
+                print(greeting())
+                break
+            elif command == "no":
+                print(final_score(user_wins, computer_wins, game_counter))
+                exit()
+            else:
+                print(error_message())
+                continue
 
-        if command == 'yes':
-            print(greeting())
-            continue
-            
-        elif command == "no":
-            print(final_score(user_wins, computer_wins, game_counter))
-            break
 
     elif is_draw(player_move , computer_says):
         game_counter += 1
@@ -71,7 +99,4 @@ while True:
         print(you_lose_message())
 
 
-
-    # TODO:
-    # SQUID GAME TYPE ROCK PAPER SCISSORS WITH TWO HANDS
 
